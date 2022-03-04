@@ -20,8 +20,30 @@ public class Rocket {
             throw new Exception("El format del identificador no és vàlid");
     }
 
-    private void checkNumberOfPropellers(ArrayList propellers) throws Exception {
+    private void checkNumberOfPropellers(List propellers) throws Exception {
         if (propellers.size() == 0) throw new Exception("El nombre de propulsors ha de ser superior a 0");
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void throttlePropellers() {
+        for (Propeller propeller : propellers) {
+            propeller.throttle();
+        }
+    }
+
+    public void brakePropellers() {
+        for (Propeller propeller : propellers) {
+            propeller.brake();
+        }
+    }
+
+    public int currentPower() {
+        return propellers.stream()
+                .mapToInt(Propeller::getCurrentPower)
+                .sum();
     }
 
     @Override
