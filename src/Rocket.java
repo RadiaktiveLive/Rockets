@@ -1,26 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rocket {
 
     private String id;
-    private int numberOfPropellers;
+    private List<Propeller> propellers = new ArrayList<>();
 
-    public Rocket(String id, int numberOfPropellers) throws Exception {
+    public Rocket(String id, ArrayList<Integer> propellers) throws Exception {
         checkId(id);
-        checkNumberOfPropellers(numberOfPropellers);
+        checkNumberOfPropellers(propellers);
         this.id = id;
-        this.numberOfPropellers = numberOfPropellers;
+        for (Integer current : propellers) {
+            this.propellers.add(new Propeller(current));
+        }
     }
 
     private void checkId(String id) throws Exception {
-        if (!id.toUpperCase().matches("^[A-Za-z0-9 -]{8}$"))
+        if (!id.toUpperCase().matches("^[A-Z0-9]{8}$"))
             throw new Exception("El format del identificador no és vàlid");
     }
 
-    private void checkNumberOfPropellers(int numberOfPropellers) throws Exception {
-        if (numberOfPropellers <= 0) throw new Exception("El nombre de propulsors ha de ser superior a 0");
+    private void checkNumberOfPropellers(ArrayList propellers) throws Exception {
+        if (propellers.size() == 0) throw new Exception("El nombre de propulsors ha de ser superior a 0");
     }
 
     @Override
     public String toString() {
-        return id + ": " + numberOfPropellers + " propulsors";
+        return id + ": " + propellers;
     }
 }
