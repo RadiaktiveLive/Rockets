@@ -2,6 +2,7 @@ public class Propeller {
 
     private int maxPower;
     private int currentPower = 0;
+    private static final int POWER = 10;
 
     public Propeller(int maxPower) throws Exception {
         checkMaxPower(maxPower);
@@ -17,14 +18,14 @@ public class Propeller {
     }
 
     public void throttle() {
-        if ((currentPower + 10) <= maxPower) {
-            currentPower += 10;
+        if ((currentPower + POWER) <= maxPower) {
+            currentPower += POWER;
         }
     }
 
     public void brake() {
-        if ((currentPower - 10) >= 0) {
-            currentPower -= 10;
+        if ((currentPower - POWER) >= 0) {
+            currentPower -= POWER;
         }
     }
 
