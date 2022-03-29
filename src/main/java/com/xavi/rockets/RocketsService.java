@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class RocketsService {
+
 	@Autowired
 	private RocketsRepository rocketRepository;
 
@@ -20,14 +21,16 @@ public class RocketsService {
 
 	public List<Rocket> getRockets() {
 		List<Rocket> rocketList = new ArrayList<>();
-		for(Rocket rocket : rocketRepository.findAll()){
+		for (Rocket rocket : rocketRepository.findAll()) {
 			rocketList.add(rocket);
 		}
 		return rocketList;
 	}
 
-	public void deleteRockets() {
+	public List<Rocket> deleteRockets() {
+		List<Rocket> rocket = getRockets();
 		rocketRepository.deleteAll();
+		return rocket;
 	}
 
 	public Rocket updateRocket(Long rocketId, Rocket rocketToUpdate) throws Exception {
@@ -46,12 +49,13 @@ public class RocketsService {
 		return rocket;
 	}
 
-	public Rocket addPropeller(Long rocketId, Propeller propeller) {
+	public Propeller addPropeller(Long rocketId, Propeller propeller) {
 		Rocket rocket = getRocket(rocketId);
-		//rocket.addPropeller(propeller);
 		propeller.setRocket(rocket);
-		return propellerRepository.save(propeller).getRocket();
-		//return rocketRepository.save(rocket);
-		//return rocket;
+		return propellerRepository.save(propeller);
+	}
+
+	public Rocket moveRocket(String rocketId, int repeat, int operation) {
+		return null;
 	}
 }

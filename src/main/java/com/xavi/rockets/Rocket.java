@@ -62,6 +62,14 @@ public class Rocket {
 		this.code = code;
 	}
 
+	public List<Propeller> getPropellers() {
+		return propellers;
+	}
+
+	public void setPropellers(List<Propeller> propellers) {
+		this.propellers = propellers;
+	}
+
 	public void throttlePropellers() {
 		for (Propeller propeller : propellers) {
 			propeller.throttle();
@@ -79,6 +87,7 @@ public class Rocket {
 				.mapToInt(Propeller::getCurrentPower)
 				.sum();
 	}
+
 	/*
 	public void addPropellers(List<Propeller> propellerList){
 		for(Propeller propeller : propellerList){
@@ -86,7 +95,7 @@ public class Rocket {
 		}
 	}
 	*/
-	public void addPropeller(Propeller propeller){
+	public void addPropeller(Propeller propeller) {
 		propellers.add(propeller);
 	}
 
