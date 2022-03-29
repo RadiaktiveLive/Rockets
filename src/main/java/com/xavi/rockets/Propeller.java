@@ -1,8 +1,30 @@
+package com.xavi.rockets;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+
+@Entity
 public class Propeller {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 	private int maxPower;
 	private int currentPower = 0;
 	private static final int POWER_STEP = 10;
+
+	@ManyToOne()
+	@JoinColumn(name = "rocket_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnore
+	private Rocket rocket;
+
+	public Propeller() {
+	}
 
 	public Propeller(int maxPower) throws Exception {
 		checkMaxPower(maxPower);
@@ -15,6 +37,26 @@ public class Propeller {
 
 	public int getCurrentPower() {
 		return currentPower;
+	}
+
+	public int getMaxPower() {
+		return maxPower;
+	}
+
+	public void setMaxPower(int maxPower) {
+		this.maxPower = maxPower;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public Rocket getRocket() {
+		return rocket;
+	}
+
+	public void setRocket(Rocket rocket) {
+		this.rocket = rocket;
 	}
 
 	public void throttle() {

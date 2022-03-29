@@ -1,3 +1,5 @@
+package com.xavi.rockets;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,16 +32,16 @@ public class Main {
 	}
 
 	private static void printRocketsInformation(List<Rocket> rockets) {
-		System.out.println("Rocket info:");
+		System.out.println("com.xavi.rockets.Rocket info:");
 		for (Rocket currentRocket : rockets) {
 			System.out.println(currentRocket);
 		}
 	}
 
 	private static void printRocketsCurrentPower(List<Rocket> rockets) {
-		System.out.println("Rocket current power:");
+		System.out.println("com.xavi.rockets.Rocket current power:");
 		for (Rocket currentRocket : rockets) {
-			System.out.println(currentRocket.getId() + ": " + currentRocket.currentPower());
+			System.out.println(currentRocket.getCode() + ": " + currentRocket.currentPower());
 		}
 	}
 
@@ -64,7 +66,7 @@ public class Main {
 
 	public static Rocket findRocketById(List<Rocket> rockets, String rocketToFind) throws Exception {
 		return rockets.stream()
-				.filter(rocket -> rocketToFind.equals(rocket.getId()))
+				.filter(rocket -> rocketToFind.equals(rocket.getCode()))
 				.findFirst()
 				.orElseThrow(() -> new Exception("No s'ha trobat el coet"));
 	}
