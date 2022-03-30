@@ -1,5 +1,7 @@
 package com.xavi.rockets;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,6 +20,7 @@ public class Rocket {
 
 	@OneToMany(mappedBy = "rocket")
 	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonManagedReference
 	private List<Propeller> propellers = new ArrayList<>();
 
 	public Rocket() {
@@ -82,6 +85,7 @@ public class Rocket {
 		}
 	}
 
+	@JsonProperty("currentPower")
 	public int currentPower() {
 		return propellers.stream()
 				.mapToInt(Propeller::getCurrentPower)

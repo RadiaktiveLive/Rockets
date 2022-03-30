@@ -34,4 +34,8 @@ public class PropellerService {
 		propellerRepository.deleteById(propellerId);
 		return propeller;
 	}
+
+	public void saveAllPropellers(List<Propeller> propellers) {
+		propellerRepository.saveAll(propellers);
+	}
 }

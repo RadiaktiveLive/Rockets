@@ -35,16 +35,38 @@ public class RocketsRestController {
 
 	///////////////////////////
 
-	@PostMapping("/rockets/{rocketId}")
-	public Rocket moveRocket(@PathVariable String rocketId, @RequestBody String jsonString) {
+	@PostMapping("/rockets/{rocketId}/movement")
+	public Rocket moveRocket(@PathVariable Long rocketId, @RequestBody Movement movement) {
+		//Rocket rocket = rocketRepository.findById(rocketId).get();
+		Rocket rocket = rocketService.getRocket(rocketId);
 
-		JSONObject jsonObject = new JSONObject(jsonString);
-		int repeat = jsonObject.getInt("repeat");
-		int operation = jsonObject.getInt("operation");
+/*
+		for (int i = 0; i < movement.getTimes(); i++) {
+			if(movement.getMovementType().equals(Movement.ACCELERATE)){
+				rocket.throttlePropellers();
+			}else if(movement.getMovementType().equals(Movement.BRAKE)){
+				rocket.brakePropellers();
+			}
+		}
+*/
+		rocket = rocketService.moveRocket(rocket, movement);
 
-		return rocketService.moveRocket(rocketId, repeat, operation);
+		//propellerRepository.saveAll(rocket.getPropellers());
+		propellerService.saveAllPropellers(rocket.getPropellers());
+		return rocket;
 	}
 
+	/*
+		@PostMapping("/rockets/{rocketId}")
+		public Rocket moveRocket(@PathVariable String rocketId, @RequestBody String jsonString) {
+
+			JSONObject jsonObject = new JSONObject(jsonString);
+			int repeat = jsonObject.getInt("repeat");
+			int operation = jsonObject.getInt("operation");
+
+			return rocketService.moveRocket(rocketId, repeat, operation);
+		}
+	*/
 	@PutMapping("/rockets/{rocketId}")
 	public Rocket updateRocket(@PathVariable Long rocketId, @RequestBody Rocket rocket) throws Exception {
 		return rocketService.updateRocket(rocketId, rocket);

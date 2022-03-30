@@ -55,7 +55,21 @@ public class RocketsService {
 		return propellerRepository.save(propeller);
 	}
 
+	public Rocket moveRocket(Rocket rocket, Movement movement) {
+		for (int i = 0; i < movement.getTimes(); i++) {
+			if(movement.getMovementType().equals(Movement.ACCELERATE)){
+				rocket.throttlePropellers();
+			}else if(movement.getMovementType().equals(Movement.BRAKE)){
+				rocket.brakePropellers();
+			}
+		}
+		return rocket;
+	}
+
+
+/*
 	public Rocket moveRocket(String rocketId, int repeat, int operation) {
 		return null;
 	}
+	*/
 }
