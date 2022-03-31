@@ -1,5 +1,10 @@
-package com.xavi.rockets;
+package com.xavi.rockets.service;
 
+import com.xavi.rockets.domain.Movement;
+import com.xavi.rockets.domain.Propeller;
+import com.xavi.rockets.domain.Rocket;
+import com.xavi.rockets.repository.PropellerRepository;
+import com.xavi.rockets.repository.RocketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,13 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RocketsService {
+public class RocketService {
 
-	@Autowired
-	private RocketsRepository rocketRepository;
+	private RocketRepository rocketRepository;
 
-	@Autowired
 	private PropellerRepository propellerRepository;
+
+	public RocketService(RocketRepository rocketRepository, PropellerRepository propellerRepository) {
+		this.rocketRepository = rocketRepository;
+		this.propellerRepository = propellerRepository;
+	}
 
 	public Rocket addRocket(Rocket rocket) {
 		return rocketRepository.save(rocket);
@@ -57,19 +65,13 @@ public class RocketsService {
 
 	public Rocket moveRocket(Rocket rocket, Movement movement) {
 		for (int i = 0; i < movement.getTimes(); i++) {
-			if(movement.getMovementType().equals(Movement.ACCELERATE)){
+			if (movement.getMovementType().equals(Movement.ACCELERATE)) {
 				rocket.throttlePropellers();
-			}else if(movement.getMovementType().equals(Movement.BRAKE)){
+			} else if (movement.getMovementType().equals(Movement.BRAKE)) {
 				rocket.brakePropellers();
 			}
 		}
+		propellerRepository.saveAll(rocket.getPropellers());
 		return rocket;
 	}
-
-
-/*
-	public Rocket moveRocket(String rocketId, int repeat, int operation) {
-		return null;
-	}
-	*/
 }

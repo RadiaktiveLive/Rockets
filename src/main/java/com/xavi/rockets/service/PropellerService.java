@@ -1,5 +1,7 @@
-package com.xavi.rockets;
+package com.xavi.rockets.service;
 
+import com.xavi.rockets.domain.Propeller;
+import com.xavi.rockets.repository.PropellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,8 +10,11 @@ import java.util.List;
 @Service
 public class PropellerService {
 
-	@Autowired
 	private PropellerRepository propellerRepository;
+
+	public PropellerService(PropellerRepository propellerRepository) {
+		this.propellerRepository = propellerRepository;
+	}
 
 	public List<Propeller> getPropellers(Long rocketId) {
 		return propellerRepository.findAllByRocketId(rocketId);
@@ -33,9 +38,5 @@ public class PropellerService {
 		Propeller propeller = getPropeller(rocketId, propellerId);
 		propellerRepository.deleteById(propellerId);
 		return propeller;
-	}
-
-	public void saveAllPropellers(List<Propeller> propellers) {
-		propellerRepository.saveAll(propellers);
 	}
 }

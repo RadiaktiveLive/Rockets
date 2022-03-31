@@ -1,5 +1,7 @@
 package com.xavi.rockets;
 
+import com.xavi.rockets.domain.Rocket;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,14 +34,14 @@ public class Main {
 	}
 
 	private static void printRocketsInformation(List<Rocket> rockets) {
-		System.out.println("com.xavi.rockets.Rocket info:");
+		System.out.println("com.xavi.rockets.domain.Rocket info:");
 		for (Rocket currentRocket : rockets) {
 			System.out.println(currentRocket);
 		}
 	}
 
 	private static void printRocketsCurrentPower(List<Rocket> rockets) {
-		System.out.println("com.xavi.rockets.Rocket current power:");
+		System.out.println("com.xavi.rockets.domain.Rocket current power:");
 		for (Rocket currentRocket : rockets) {
 			System.out.println(currentRocket.getCode() + ": " + currentRocket.currentPower());
 		}

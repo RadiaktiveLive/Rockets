@@ -1,7 +1,6 @@
-package com.xavi.rockets;
+package com.xavi.rockets.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,7 +17,7 @@ public class Propeller {
 	private int currentPower = 0;
 	private static final int POWER_STEP = 10;
 
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "rocket_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonBackReference

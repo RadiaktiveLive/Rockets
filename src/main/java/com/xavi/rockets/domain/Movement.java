@@ -1,4 +1,4 @@
-package com.xavi.rockets;
+package com.xavi.rockets.domain;
 
 public class Movement {
 

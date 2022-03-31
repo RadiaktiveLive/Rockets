@@ -1,4 +1,4 @@
-package com.xavi.rockets;
+package com.xavi.rockets.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -92,17 +92,9 @@ public class Rocket {
 				.sum();
 	}
 
-	/*
-	public void addPropellers(List<Propeller> propellerList){
-		for(Propeller propeller : propellerList){
-			propellers.add(propeller);
-		}
-	}
-	*/
 	public void addPropeller(Propeller propeller) {
 		propellers.add(propeller);
 	}
-
 
 	@Override
 	public String toString() {

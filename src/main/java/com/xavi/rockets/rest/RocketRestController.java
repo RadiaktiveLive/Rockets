@@ -1,6 +1,10 @@
-package com.xavi.rockets;
+package com.xavi.rockets.rest;
 
-import org.json.JSONObject;
+import com.xavi.rockets.domain.Movement;
+import com.xavi.rockets.domain.Propeller;
+import com.xavi.rockets.domain.Rocket;
+import com.xavi.rockets.service.PropellerService;
+import com.xavi.rockets.service.RocketService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -8,12 +12,12 @@ import java.util.List;
 
 @RestController
 @Transactional
-public class RocketsRestController {
+public class RocketRestController {
 
-	private RocketsService rocketService;
+	private RocketService rocketService;
 	private PropellerService propellerService;
 
-	public RocketsRestController(RocketsService rocketService, PropellerService propellerService) {
+	public RocketRestController(RocketService rocketService, PropellerService propellerService) {
 		this.rocketService = rocketService;
 		this.propellerService = propellerService;
 	}
@@ -37,36 +41,11 @@ public class RocketsRestController {
 
 	@PostMapping("/rockets/{rocketId}/movement")
 	public Rocket moveRocket(@PathVariable Long rocketId, @RequestBody Movement movement) {
-		//Rocket rocket = rocketRepository.findById(rocketId).get();
 		Rocket rocket = rocketService.getRocket(rocketId);
-
-/*
-		for (int i = 0; i < movement.getTimes(); i++) {
-			if(movement.getMovementType().equals(Movement.ACCELERATE)){
-				rocket.throttlePropellers();
-			}else if(movement.getMovementType().equals(Movement.BRAKE)){
-				rocket.brakePropellers();
-			}
-		}
-*/
-		rocket = rocketService.moveRocket(rocket, movement);
-
-		//propellerRepository.saveAll(rocket.getPropellers());
-		propellerService.saveAllPropellers(rocket.getPropellers());
+		rocketService.moveRocket(rocket, movement);
 		return rocket;
 	}
 
-	/*
-		@PostMapping("/rockets/{rocketId}")
-		public Rocket moveRocket(@PathVariable String rocketId, @RequestBody String jsonString) {
-
-			JSONObject jsonObject = new JSONObject(jsonString);
-			int repeat = jsonObject.getInt("repeat");
-			int operation = jsonObject.getInt("operation");
-
-			return rocketService.moveRocket(rocketId, repeat, operation);
-		}
-	*/
 	@PutMapping("/rockets/{rocketId}")
 	public Rocket updateRocket(@PathVariable Long rocketId, @RequestBody Rocket rocket) throws Exception {
 		return rocketService.updateRocket(rocketId, rocket);
@@ -115,5 +94,4 @@ public class RocketsRestController {
 	public Propeller deletePropeller(@PathVariable Long rocketId, @PathVariable Long propellerId) {
 		return propellerService.deletePropeller(rocketId, propellerId);
 	}
-
 }
