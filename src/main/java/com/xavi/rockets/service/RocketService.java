@@ -72,7 +72,8 @@ public class RocketService {
 				rocket.brakePropellers();
 			}
 		}
-		propellerRepository.saveAll(rocket.getPropellers());
+		//propellerRepository.saveAll(rocket.getPropellers());
+		rocketRepository.save(rocket);
 		return rocket;
 	}
 }
