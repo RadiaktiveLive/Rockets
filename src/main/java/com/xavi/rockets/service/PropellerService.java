@@ -24,7 +24,7 @@ public class PropellerService {
 		return propellerRepository.deleteAllByRocketId(rocketId);
 	}
 
-	public Propeller updatePropeller(Long rocketId, Long propellerId, Propeller propellerToUpdate) {
+	public Propeller updatePropeller(Long rocketId, Long propellerId, Propeller propellerToUpdate) throws Exception {
 		Propeller propeller = getPropeller(rocketId, propellerId);
 		propeller.setMaxPower(propellerToUpdate.getMaxPower());
 		return propellerRepository.save(propeller);

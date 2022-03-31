@@ -43,7 +43,8 @@ public class Propeller {
 		return maxPower;
 	}
 
-	public void setMaxPower(int maxPower) {
+	public void setMaxPower(int maxPower) throws Exception {
+		checkMaxPower(maxPower);
 		this.maxPower = maxPower;
 	}
 
@@ -72,9 +73,9 @@ public class Propeller {
 			currentPower = 0;
 		}
 	}
-
+/*
 	@Override
 	public String toString() {
 		return "" + maxPower;
-	}
+	}*/
 }

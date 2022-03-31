@@ -81,7 +81,7 @@ public class RocketRestController {
 	///////////////////////////
 
 	@PutMapping("/rockets/{rocketId}/propellers/{propellerId}")
-	public Propeller updatePropeller(@PathVariable Long rocketId, @PathVariable Long propellerId, @RequestBody Propeller propeller) {
+	public Propeller updatePropeller(@PathVariable Long rocketId, @PathVariable Long propellerId, @RequestBody Propeller propeller) throws Exception {
 		return propellerService.updatePropeller(rocketId, propellerId, propeller);
 	}
 
