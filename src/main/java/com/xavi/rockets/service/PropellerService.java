@@ -21,8 +21,8 @@ public class PropellerService {
 		return propellerRepository.findAllByRocketId(rocketId);
 	}
 
-	public List<Propeller> deletePropellers(Long rocketId) {
-		return propellerRepository.deleteAllByRocketId(rocketId);
+	public void deletePropellers(Long rocketId) {
+		propellerRepository.deleteAllByRocketId(rocketId);
 	}
 
 	public Propeller updatePropeller(Long rocketId, Long propellerId, Propeller propellerToUpdate) throws Exception {
@@ -35,9 +35,8 @@ public class PropellerService {
 		return propellerRepository.findByIdAndRocketId(propellerId, rocketId);
 	}
 
-	public Propeller deletePropeller(Long rocketId, Long propellerId) {
+	public void deletePropeller(Long rocketId, Long propellerId) {
 		Propeller propeller = getPropeller(rocketId, propellerId);
 		propellerRepository.deleteById(propellerId);
-		return propeller;
 	}
 }

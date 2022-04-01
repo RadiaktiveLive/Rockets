@@ -73,9 +73,5 @@ public class Propeller {
 			currentPower = 0;
 		}
 	}
-/*
-	@Override
-	public String toString() {
-		return "" + maxPower;
-	}*/
+
 }

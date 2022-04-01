@@ -1,6 +1,6 @@
 package com.xavi.rockets.service;
 
-import com.xavi.rockets.domain.Movement;
+import com.xavi.rockets.rest.vm.MovementVM;
 import com.xavi.rockets.domain.Propeller;
 import com.xavi.rockets.domain.Rocket;
 import com.xavi.rockets.repository.PropellerRepository;
@@ -36,10 +36,8 @@ public class RocketService {
 		return rocketList;
 	}
 
-	public List<Rocket> deleteRockets() {
-		List<Rocket> rocket = getRockets();
+	public void deleteRockets() {
 		rocketRepository.deleteAll();
-		return rocket;
 	}
 
 	public Rocket updateRocket(Long rocketId, Rocket rocketToUpdate) throws Exception {
@@ -52,10 +50,9 @@ public class RocketService {
 		return rocketRepository.findById(rocketId).get();
 	}
 
-	public Rocket deleteRocket(Long rocketId) {
+	public void deleteRocket(Long rocketId) {
 		Rocket rocket = getRocket(rocketId);
 		rocketRepository.deleteById(rocketId);
-		return rocket;
 	}
 
 	public Propeller addPropeller(Long rocketId, Propeller propeller) {
@@ -64,15 +61,14 @@ public class RocketService {
 		return propellerRepository.save(propeller);
 	}
 
-	public Rocket moveRocket(Rocket rocket, Movement movement) {
-		for (int i = 0; i < movement.getTimes(); i++) {
-			if (movement.getMovementType().equals(Movement.ACCELERATE)) {
+	public Rocket moveRocket(Rocket rocket, MovementVM movementVM) {
+		for (int i = 0; i < movementVM.getTimes(); i++) {
+			if (movementVM.getMovementType().equals(MovementVM.ACCELERATE)) {
 				rocket.throttlePropellers();
-			} else if (movement.getMovementType().equals(Movement.BRAKE)) {
+			} else if (movementVM.getMovementType().equals(MovementVM.BRAKE)) {
 				rocket.brakePropellers();
 			}
 		}
-		//propellerRepository.saveAll(rocket.getPropellers());
 		rocketRepository.save(rocket);
 		return rocket;
 	}

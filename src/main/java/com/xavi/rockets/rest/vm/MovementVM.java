@@ -1,16 +1,16 @@
-package com.xavi.rockets.domain;
+package com.xavi.rockets.rest.vm;
 
-public class Movement {
+public class MovementVM {
 
 	public static final int ACCELERATE = 1;
 	public static final int BRAKE = 2;
 	private Integer movementType;
 	private int times;
 
-	public Movement() {
+	public MovementVM() {
 	}
 
-	public Movement(Integer movementType, int times) {
+	public MovementVM(Integer movementType, int times) {
 		this.movementType = movementType;
 		this.times = times;
 	}

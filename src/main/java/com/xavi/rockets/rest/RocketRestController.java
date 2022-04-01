@@ -1,6 +1,6 @@
 package com.xavi.rockets.rest;
 
-import com.xavi.rockets.domain.Movement;
+import com.xavi.rockets.rest.vm.MovementVM;
 import com.xavi.rockets.domain.Propeller;
 import com.xavi.rockets.domain.Rocket;
 import com.xavi.rockets.service.PropellerService;
@@ -33,16 +33,16 @@ public class RocketRestController {
 	}
 
 	@DeleteMapping("/rockets")
-	public List<Rocket> deleteRockets() {
-		return rocketService.deleteRockets();
+	public void deleteRockets() {
+		rocketService.deleteRockets();
 	}
 
 	///////////////////////////
 
 	@PostMapping("/rockets/{rocketId}/movement")
-	public Rocket moveRocket(@PathVariable Long rocketId, @RequestBody Movement movement) {
+	public Rocket moveRocket(@PathVariable Long rocketId, @RequestBody MovementVM movementVM) {
 		Rocket rocket = rocketService.getRocket(rocketId);
-		rocketService.moveRocket(rocket, movement);
+		rocketService.moveRocket(rocket, movementVM);
 		return rocket;
 	}
 
@@ -57,8 +57,8 @@ public class RocketRestController {
 	}
 
 	@DeleteMapping("/rockets/{rocketId}")
-	public Rocket deleteRocket(@PathVariable Long rocketId) {
-		return rocketService.deleteRocket(rocketId);
+	public void deleteRocket(@PathVariable Long rocketId) {
+		rocketService.deleteRocket(rocketId);
 	}
 
 	///////////////////////////
@@ -74,8 +74,8 @@ public class RocketRestController {
 	}
 
 	@DeleteMapping("/rockets/{rocketId}/propellers")
-	public List<Propeller> deletePropellers(@PathVariable Long rocketId) {
-		return propellerService.deletePropellers(rocketId);
+	public void deletePropellers(@PathVariable Long rocketId) {
+		propellerService.deletePropellers(rocketId);
 	}
 
 	///////////////////////////
@@ -91,7 +91,7 @@ public class RocketRestController {
 	}
 
 	@DeleteMapping("/rockets/{rocketId}/propellers/{propellerId}")
-	public Propeller deletePropeller(@PathVariable Long rocketId, @PathVariable Long propellerId) {
-		return propellerService.deletePropeller(rocketId, propellerId);
+	public void deletePropeller(@PathVariable Long rocketId, @PathVariable Long propellerId) {
+		propellerService.deletePropeller(rocketId, propellerId);
 	}
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface PropellerRepository extends CrudRepository<Propeller, Long> {
 	List<Propeller> findAllByRocketId(Long rocketId);
 
-	List<Propeller> deleteAllByRocketId(Long rocketId);
+	void deleteAllByRocketId(Long rocketId);
 
 	Propeller findByIdAndRocketId(Long propellerId, Long rocketId);
 }

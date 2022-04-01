@@ -26,36 +26,20 @@ public class Rocket {
 	public Rocket() {
 	}
 
-	public Rocket(String code, ArrayList<Integer> propellers) throws Exception {
+	public Rocket(String code) throws Exception {
 		checkCode(code);
 		this.code = code;
-		//createPropellers(propellers);
 	}
-/*
-	private void createPropellers(ArrayList<Integer> propellers) throws Exception {
-		checkNumberOfPropellers(propellers);
-		for (Integer current : propellers) {
-			this.propellers.add(new Propeller(current));
-		}
-	}
-*/
+
 	private void checkCode(String code) throws Exception {
 		if (!code.toUpperCase().matches("^[A-Z0-9]{8}$"))
 			throw new Exception("El format del identificador no és vàlid");
 	}
-/*
-	private void checkNumberOfPropellers(List propellers) throws Exception {
-		if (propellers.size() == 0) throw new Exception("El nombre de propulsors ha de ser superior a 0");
-	}
-*/
+
 	public Long getId() {
 		return id;
 	}
-/*
-	public void setId(Long id) {
-		this.id = id;
-	}
-*/
+
 	public String getCode() {
 		return code;
 	}
@@ -68,11 +52,7 @@ public class Rocket {
 	public List<Propeller> getPropellers() {
 		return propellers;
 	}
-/*
-	public void setPropellers(List<Propeller> propellers) {
-		this.propellers = propellers;
-	}
-*/
+
 	public void throttlePropellers() {
 		for (Propeller propeller : propellers) {
 			propeller.throttle();
@@ -91,13 +71,5 @@ public class Rocket {
 				.mapToInt(Propeller::getCurrentPower)
 				.sum();
 	}
-/*
-	public void addPropeller(Propeller propeller) {
-		propellers.add(propeller);
-	}
 
-	@Override
-	public String toString() {
-		return code + ": " + propellers;
-	}*/
 }
